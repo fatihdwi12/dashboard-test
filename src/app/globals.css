@@ -1,31 +1,90 @@
-﻿@tailwind base;
+﻿/* === Tailwind v3 directives (WAJIB paling atas) === */
+@tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@import "tailwindcss";
-
+/* === Variabel tema dasar (opsional) === */
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #0a0a0a;
+  --muted: #f3f4f6; /* abu muda */
+  --border: #e5e7eb; /* garis halus */
+  --primary: #111827; /* teks utama gelap */
+  --accent: #2563eb; /* biru aksen */
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* Dark mode (class-based, cocok dengan next-themes) */
+.dark {
+  --background: #0a0a0a;
+  --foreground: #ffffff;
+  --muted: #111827;
+  --border: #1f2937;
+  --primary: #e5e7eb;
+  --accent: #60a5fa;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* === Reset ringan & base style === */
+html,
+body,
+#__next {
+  height: 100%;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
 }
 
+/* Hilangkan outline bawaan yang jelek, tetap aksesibel saat focus-visible */
+* {
+  @apply border-border;
+  border-color: var(--border);
+}
+:focus {
+  outline: none;
+}
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* === Utilitas kecil berguna (opsional) === */
+.container {
+  @apply mx-auto px-4 sm:px-6 lg:px-8;
+}
+
+.card {
+  @apply rounded-2xl shadow-sm border bg-white/60 dark:bg-white/5 backdrop-blur;
+}
+
+.btn {
+  @apply inline-flex items-center justify-center rounded-xl px-4 py-2 text-sm font-medium transition;
+}
+.btn-primary {
+  @apply bg-blue-600 text-white hover:bg-blue-700 active:bg-blue-800 disabled:opacity-50;
+}
+.btn-ghost {
+  @apply bg-transparent hover:bg-black/5 dark:hover:bg-white/10;
+}
+
+/* === Scrollbar halus (opsional, non-blocking) === */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent) transparent;
+}
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+*::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: 9999px;
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
