@@ -1,0 +1,64 @@
+{
+  "compilerOptions": {
+    // ---- Ketegasan typing ----
+    "strict": true,
+    "noImplicitAny": true,
+    "noUncheckedIndexedAccess": true,
+    "noFallthroughCasesInSwitch": true,
+    "exactOptionalPropertyTypes": true,
+    "noImplicitOverride": true,
+    "forceConsistentCasingInFileNames": true,
+    // ---- Modul & resolver (penting untuk Tailwind .mts) ----
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    // ---- Target & lib modern ----
+    "target": "ES2022",
+    "lib": [
+      "ES2022",
+      "DOM",
+      "DOM.Iterable"
+    ],
+    // ---- Lain-lain yang aman di Next 16 ----
+    "jsx": "react-jsx",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "src/*"
+      ]
+    },
+    "types": [
+      "node"
+    ],
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "incremental": true,
+    // Opsi kompatibilitas import (boleh tetap on)
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "allowJs": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    ".next/dev/types/**/*.ts",
+    ".next\\dev/types/**/*.ts",
+    ".next\\dev/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    ".next",
+    "dist",
+    // Exclude file konfigurasi agar TS tidak ikut ngetik config-tools
+    "tailwind.config.*",
+    "postcss.config.*"
+  ]
+}
